@@ -12,6 +12,8 @@ app = FastAPI()
 class PlayPayload(BaseModel):
     name: str
     pos: int
+class NewGamePayload(BaseModel):
+    name: str
 
 @app.get("/")
 def read_root():
@@ -25,3 +27,7 @@ def read_item(item_id: int, q: Optional[str] = None):
 @app.post("/play")
 def play(payload: PlayPayload):
     return game_service_obj.play_game(payload.name, payload.pos)
+
+@app.post("/new-game")
+def play(payload: NewGamePayload):
+    return game_service_obj.start_new_game(payload.name)

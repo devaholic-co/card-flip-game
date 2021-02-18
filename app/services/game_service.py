@@ -62,6 +62,7 @@ class game_service():
     random.shuffle(all_card)
     self.logger.info(name + " => new game: " + ','.join(str(e) for e in all_card))
     self.db_model.start_new_game(name, all_card)
+    return True
 
   def check_victory(self, user_data):
     if(len(user_data['success_opened']) == 10 and user_data['current_stage'] == 1):
