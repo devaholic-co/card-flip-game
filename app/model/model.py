@@ -10,6 +10,11 @@ class model():
   def get_user_path(self, name):
       return './app/database/'+name+'.json'
 
+  def get_global_best_score(self):
+      with open('./app/database/global_best_score.json') as json_file:
+          data = json.load(json_file)
+      return data['score']
+
   def read_db(self, name):
       user_path = self.get_user_path(name)
 

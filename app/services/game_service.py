@@ -11,6 +11,9 @@ class game_service():
       self.validation_service = validation_service
       self.logger = logger
 
+  def get_global_best_score(self):
+    return self.db_model.get_global_best_score()
+
   def play_game(self, name, pos):
     user_data = self.db_model.read_db(name)
     if not user_data:
