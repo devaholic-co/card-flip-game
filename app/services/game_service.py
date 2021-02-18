@@ -17,7 +17,7 @@ class game_service():
     
     return_data = {
         'is_victory': False,
-        'my_best': user_data['user_best_score']
+        'my_best': user_data['user_best_score'],
         'card_value': [0,0,0,0,0,0,0,0,0,0,0,0]
     }
     op = user_data['success_opened'].copy()
