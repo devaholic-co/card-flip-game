@@ -17,6 +17,7 @@ class game_service():
     
     return_data = {
         'is_victory': False,
+        'my_best': user_data['user_best_score']
         'card_value': [0,0,0,0,0,0,0,0,0,0,0,0]
     }
     op = user_data['success_opened'].copy()
@@ -32,6 +33,7 @@ class game_service():
     if (self.check_victory(user_data)):
         user_data['user_best_score'] = user_data['count']
         return_data['is_victory'] = True
+        return_data['my_best'] = user_data['user_best_score']
     elif (user_data['current_stage'] == 0):
         user_data['current_stage'] = 1
         user_data['last_opened'] = pos
