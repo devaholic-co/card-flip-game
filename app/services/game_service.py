@@ -1,14 +1,15 @@
 import random
 import sys
-# sys.path.append('./')
 from model import model
 from services import validation_service
+from logger import logger
 
 class game_service():
 
-  def __init__(self, db_model = model.model(), validation_service = validation_service.validation_service()):
+  def __init__(self, db_model = model.model(), validation_service = validation_service.validation_service(), logger = logger.logger()):
       self.db_model = db_model
       self.validation_service = validation_service
+      self.logger = logger
 
   def play_game(self, name, pos):
     user_data = self.db_model.read_db(name)
@@ -22,6 +23,7 @@ class game_service():
     }
     op = user_data['success_opened'].copy()
 
+    self.logger.info(name + " => try to open: " + str(pos))
     if not self.validation_service.validate_open_card(pos, user_data):
       if(user_data['current_stage'] == 1):
         op.append(user_data['last_opened'])
@@ -34,6 +36,7 @@ class game_service():
         user_data['user_best_score'] = user_data['count']
         return_data['is_victory'] = True
         return_data['my_best'] = user_data['user_best_score']
+        self.logger.info(name + " => victory with: " + str(user_data['count']))
     elif (user_data['current_stage'] == 0):
         user_data['current_stage'] = 1
         user_data['last_opened'] = pos
@@ -57,6 +60,7 @@ class game_service():
   def start_new_game(self, name):
     all_card = [1,1,2,2,3,3,4,4,5,5,6,6]
     random.shuffle(all_card)
+    self.logger.info(name + " => new game: " + ','.join(str(e) for e in all_card))
     self.db_model.start_new_game(name, all_card)
 
   def check_victory(self, user_data):
