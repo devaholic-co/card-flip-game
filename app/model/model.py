@@ -7,7 +7,7 @@ class model():
       print('init')
       
   def read_db(self, name):
-      user_path = './app/database/'+name+'.json'
+      user_path = './database/'+name+'.json'
       if not path.exists(user_path):
           return {}
       with open(user_path) as json_file:
@@ -15,7 +15,7 @@ class model():
       return data
 
 #   def update_db(self, name, all_card, count, success_opened, last_opened, current_stage, user_best_score):
-#       with open('./app/database/'+name+'.json', 'w') as outfile:
+#       with open('./database/'+name+'.json', 'w') as outfile:
 #           data = {}
 #           data['all_card'] = all_card
 #           data['count'] = count
@@ -26,11 +26,11 @@ class model():
 #           json.dump(data, outfile)
 
   def update_db(self, name, user_data):
-      with open('./app/database/'+name+'.json', 'w') as outfile:
+      with open('./database/'+name+'.json', 'w') as outfile:
           json.dump(user_data, outfile)
 
   def start_new_game(self, name, all_card):
-      user_path = './app/database/'+name+'.json'
+      user_path = './database/'+name+'.json'
       data = {}
       data['all_card'] = all_card
       data['count'] = 0
