@@ -1,8 +1,8 @@
 import random
 import sys
-from model import model
-from services import validation_service
-from logger import logger
+from app.model import model
+from app.services import validation_service
+from app.logger import logger
 
 class game_service():
 

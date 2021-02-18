@@ -1,14 +1,14 @@
 import json
 import os.path
 from os import path
-from logger import logger
+from app.logger import logger
 
 class model():
   def __init__(self, logger = logger.logger()):
       self.logger = logger
       
   def get_user_path(self, name):
-      return './database/'+name+'.json'
+      return './app/database/'+name+'.json'
 
   def read_db(self, name):
       user_path = self.get_user_path(name)
