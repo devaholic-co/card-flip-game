@@ -28,48 +28,11 @@ def play(payload: PlayPayload):
 def play(payload: NewGamePayload):
     return game_service_obj.start_new_game(payload.name)
 
-from fastapi.responses import HTMLResponse
-
-html = """
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Chat</title>
-    </head>
-    <body>
-        <h1>WebSocket Chat</h1>
-        <form action="" onsubmit="sendMessage(event)">
-            <input type="text" id="messageText" autocomplete="off"/>
-            <button>Send</button>
-        </form>
-        <div id="content">temp</div>
-        <ul id='messages'>
-        </ul>
-        <script>
-            var ws = new WebSocket("ws://localhost:80/ws");
-            ws.onmessage = function(event) {
-                document.getElementById("content").innerHTML = event.data;
-            };
-            function sendMessage(event) {
-                var input = document.getElementById("messageText")
-                ws.send(input.value)
-                input.value = ''
-                event.preventDefault()
-            }
-        </script>
-    </body>
-</html>
-"""
-@app.get("/html")
-async def get():
-    return HTMLResponse(html)
-
-@app.websocket("/ws")
-async def websocket_endpoint(websocket: WebSocket):
+@app.websocket("/global-best-score")
+async def get_global_best_score(websocket: WebSocket):
     await websocket.accept()
-    highest_score = 9999
+    current_best_score = 8888
     while True:
-        if(highest_score != game_service_obj.get_global_best_score()):
-          highest_score = game_service_obj.get_global_best_score()
-          await websocket.send_text(str(highest_score))
-          
+        if(current_best_score != game_service_obj.get_global_best_score()):
+          current_best_score = game_service_obj.get_global_best_score()
+          await websocket.send_text(str(current_best_score))
