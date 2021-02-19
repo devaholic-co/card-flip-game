@@ -15,6 +15,11 @@ class model():
           data = json.load(json_file)
       return data['score']
 
+  def set_global_best_score(self, score):
+      if(score < self.get_global_best_score()):
+        with open('./app/database/global_best_score.json', 'w') as outfile:
+            json.dump({ 'score': score }, outfile)
+
   def read_db(self, name):
       user_path = self.get_user_path(name)
 
