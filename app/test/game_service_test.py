@@ -28,7 +28,6 @@ class TestGameService(unittest.TestCase):
         res = self.game_service_obj.play_game("some-player", 11)
         self.assertEqual(res['is_victory'], False, "Open New Card not victory")
         self.assertEqual(res['count'], 18, "Open New Card should increase count")
-        self.assertEqual(res['count'], 18, "Open New Card should increase count")
 
     # TODO: add test_play_game_match_card
 
