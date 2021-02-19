@@ -76,6 +76,7 @@ class game_service():
     return return_data
 
   def start_new_game(self, name):
+    # TODO: Get number from config instead of hardcode
     all_card = [1,1,2,2,3,3,4,4,5,5,6,6]
     random.shuffle(all_card)
 
@@ -85,6 +86,7 @@ class game_service():
     return True
 
   def check_victory(self, user_data):
+    # TODO: Calculate number from config instead of hardcode
     if(len(user_data['success_opened']) == 10 and user_data['current_stage'] == 1):
         return True
     else:

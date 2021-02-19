@@ -10,6 +10,8 @@ game_service_obj = game_service.game_service()
 
 app = FastAPI()
 
+# TODO: Move API to Controller Layer
+
 class PlayPayload(BaseModel):
     name: str
     pos: int
